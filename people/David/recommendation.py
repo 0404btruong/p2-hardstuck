@@ -6,3 +6,4 @@ def obtain_points():
 
 def recommendation_calculation():
   pass
+
