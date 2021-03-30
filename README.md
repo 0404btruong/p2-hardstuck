@@ -6,4 +6,10 @@ Group members: Brandon Truong, David Kim, Gavin Theriault, Kian Kishimoto
 
 Our planned project is a set of leaderboards that display top songs, with data pulled from multiple sources, such as Spotify, iTunes, Amazon Music and YouTube Music. In addition to being able to check what songs are trending, one will be able to enter their favorite songs onto a profile list, and from there obtain recommendations to listen to.
 
+## Individual Assignments
+
+Gavin/Brandon - Work on front end, create the sites and templates for displaying all the data
+David/Kian - Work on back end, write the code that pulls the data from the API's and allows it to be displayed on the website
+
+
 ### Refer to Scrum board for specific assignments and ongoing projects.
