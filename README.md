@@ -6,6 +6,10 @@ Group members: Brandon Truong, David Kim, Gavin Theriault, Kian Kishimoto
 
 Our planned project is a set of leaderboards that display top songs, with data pulled from multiple sources, such as Spotify, iTunes, Amazon Music and YouTube Music. In addition to being able to check what songs are trending, one will be able to enter their favorite songs onto a profile list, and from there obtain recommendations to listen to.
 
+First part of this is making a couple pages, home page is just 5 columns with the top 10 songs on the site, a personal page where you can track artists you like and where their songs are placing in respective catagories or in general, and a page that has the same function as the main page but maybe with specific people, genres, or sub genres.
+
+In regards to entering your favorite songs in, we will likely have a login page and database to store that info, if possible we could try to add a system to track or add your friends to see what they like.
+
 ## Individual Assignments
 
 Gavin/Brandon - Work on front end, create the sites and templates for displaying all the data
