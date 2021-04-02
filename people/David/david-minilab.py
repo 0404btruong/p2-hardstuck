@@ -1449,7 +1449,6 @@ if __name__ == "__main__":
 
     chesspiece = ChessPiece(board, piece)
 
-    '''Using getters to obtain data from object'''
     print(f"A {chesspiece.piecename} with the designation {piece} is on {chesspiece.space}")
     print(f"It is attacking {chesspiece.attacking} while defending {chesspiece.defending}")
     print(f"It is being attacked by {chesspiece.attacked_by} while being defended by {chesspiece.defended_by}")
