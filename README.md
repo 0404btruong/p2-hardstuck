@@ -2,6 +2,12 @@
 
 Group members: Brandon Truong, David Kim, Gavin Theriault, Kian Kishimoto
 
+## 4/2/21 - Minilabs
+Kian - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87fb50ec6e1ff71546/people/Kian/kian-minilab.py
+David - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87fb50ec6e1ff71546/people/David/davidminilab.py
+Brandon - 
+Gavin - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87fb50ec6e1ff71546/people/Gavin/gavinsminilab.py
+
 ## Project Plan
 
 Our planned project is a set of leaderboards that display top songs, with data pulled from multiple sources, such as Spotify, iTunes, Amazon Music and YouTube Music. In addition to being able to check what songs are trending, one will be able to enter their favorite songs onto a profile list, and from there obtain recommendations to listen to.
