@@ -4,9 +4,13 @@ Group members: Brandon Truong, David Kim, Gavin Theriault, Kian Kishimoto
 
 ## 4/2/21 - Minilabs
 Kian - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87fb50ec6e1ff71546/people/Kian/kian-minilab.py
+
 David - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87fb50ec6e1ff71546/people/David/davidminilab.py
+
 Brandon - 
+
 Gavin - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87fb50ec6e1ff71546/people/Gavin/gavinsminilab.py
+
 
 ## Project Plan
 
