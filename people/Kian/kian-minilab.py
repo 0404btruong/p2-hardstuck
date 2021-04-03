@@ -12,15 +12,15 @@ class FibonacciSeries:
         self.calculate_series()
         
     def calculate_series(self):
-        limit = self._series
+        cap = self._series
         f = [0, 1]  
-        while limit > 0:
+        while cap > 0:
             self.set_data(f[0])
             f = [f[1], f[0] + f[1]]
-            limit -= 1
+            cap -= 1
 
-    def set_data(self, num):
-        self._list.append(num)
+    def set_data(self, numbers):
+        self._list.append(numbers)
         self._dict[self._dictID] = self._list.copy()
         self._dictID += 1
 
@@ -33,7 +33,7 @@ class FibonacciSeries:
         return self._list
 
     @property
-    def number(self):
+    def value(self):
         return self._list[self._dictID - 1]
         
     def get_sequence(self, nth):
@@ -41,8 +41,8 @@ class FibonacciSeries:
 
 if __name__ == "__main__":
     n = 69
-    fibonacci = FibonacciSeries(n)
-    print(f"Fibonacci number for {n} = {fibonacci.number}")
-    print(f"Fibonacci series for {n} = {fibonacci.list}")
+    fibonaccifinal = FibonacciSeries(n)
+    print(f"Fibonacci number for {n} = {fibonaccifinal.value}")
+    print(f"Fibonacci series for {n} = {fibonaccifinal.list}")
     for i in range(n):
-        print(f"Fibonacci sequence {i + 1} = {fibonacci.get_sequence(i)}")
+        print(f"Fibonacci sequence {i + 1} = {fibonaccifinal.get_sequence(i)}")
