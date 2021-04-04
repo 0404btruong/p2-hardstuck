@@ -1,11 +1,11 @@
 from flask import Flask, Blueprint, render_template
 from people import people_bp
 from people.prep import people_prep_bp
-from people.David import people_David_bp
+from people.David import people_David_bp, davidminilab
 from people.Brandon import people_Brandon_bp
 from people.Kian import people_Kian_bp
 from people.Gavin import people_Gavin_bp
-# from people.David.david_minilab import ChessPiece
+from people.David.davidminilab import ChessPiece
 
 app = Flask(__name__)
 app.register_blueprint(people_bp, url_prefix='/people/repos')
@@ -44,8 +44,10 @@ def david_minilab():
              "a2": "wp1", "b2": "wp2", "c2": "wp3", "d2": "  ", "e2": "  ", "f2": "wp6", "g2": "wp7", "h2": "wp8",
              "a1": "WR1n", "b1": "WN1", "c1": "WB1", "d1": "WQ1", "e1": "  ", "f1": "WR2", "g1": "WK1", "h1": "  "}
 
-    # chesspiece = ChessPiece(board, piece)
-    return render_template("david-minilab.html", )
+    chesspiece = ChessPiece(board, piece)
+    allboard = [{}, {}, {}, {}, {}, {}, {}, {}]
+    [[allboard[i].update({chr(k+97) + str(i+1):board[chr(k+97) + str(i+1)]}) for k in range(8)] for i in range(8)]
+    return render_template("davidminilab.html", piece=piece, board=board, chesspiece=chesspiece)
 
 @app.errorhandler(404)
 def page_not_found(e):

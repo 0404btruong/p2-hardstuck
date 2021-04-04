@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <table>
+        {%for row in board%}
+        <tr><!-- if row == board 5 -->
+            {% if loop.index is divisibleby 2 %} <!-- if the row is even, 8,6,4,2 -->
+            {% for header,unicode in row.items() %}
+            {% if unicode == "emptySpace" %}<!-- if there is emtySpace as the value of the dictonary -->
+            <!-- this is replacing with white space -->
+            <td><input class = "{{ loop.cycle('even', 'odd') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp; inputName="firstButton" formaction={{header}} /></td>
+            {%else%}
+            <td><input class = "{{ loop.cycle('even', 'odd') }}" type ="submit" value={{unicode}} inputName="firstButton" formaction={{header}} /></td>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            {% for header,unicode  in row.items() %}   <!-- if the row is odd, 7,5,3,1 -->
+            {% if unicode == "emptySpace" %}<!-- if there is emtySpace as the value of the dictonary -->
+            <!-- this is replacing with white space -->
+            <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp; inputName="firstButton" formaction={{header}} /></td>
+            {%else%}
+            <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value={{unicode}} inputName="firstButton" formaction={{header}} /></td>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </tr>
+        {% endfor %}
+
+    </table>
+</head>
+<body>
+
+</body>
+</html>
