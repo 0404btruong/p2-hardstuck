@@ -1,22 +1,25 @@
 """Paraphrased off of morts code for the fibonacci series"""
+import random
 
+movieseries = ['Star Trek', 'Star Wars', 'Avengers', 'DC', 'Saw', 'Now You See Me', 'Jumanji']
+movies = ['Parasite', 'Joker', 'Insideous', 'Inception', 'Godzilla: King of Monsters', 'Suicide Squad', 'Interstellar', 'Upgrade', 'Vivarium', 'Gravity', 'Napoleon Dynamite']
 
-class FibonacciSeries:
+class Movies:
     def __init__(self, series):
-        if series < 2 or series > 100:
-            raise ValueError("Must be between 2 and 100")
+        if series < 0 or series > 11:
+            raise ValueError("Must be between 0 and 11")
         self._series = series
         self._list = []
         self._dict = {}
         self._dictID = 0
-        self.calculate_series()
+        self.movie_series()
         
-    def calculate_series(self):
+    def movie_series(self):
         cap = self._series
-        f = [0, 1]  
+        f = [random.sample((movies), k=int(input("How many movies do you want? (Up to 11)")))]
         while cap > 0:
             self.set_data(f[0])
-            f = [f[1], f[0] + f[1]]
+            f = [f[0]]
             cap -= 1
 
     def set_data(self, numbers):
@@ -40,9 +43,6 @@ class FibonacciSeries:
         return self._dict[nth]
 
 if __name__ == "__main__":
-    n = 69
-    fibonaccifinal = FibonacciSeries(n)
-    print(f"Fibonacci number for {n} = {fibonaccifinal.value}")
-    print(f"Fibonacci series for {n} = {fibonaccifinal.list}")
-    for i in range(n):
-        print(f"Fibonacci sequence {i + 1} = {fibonaccifinal.get_sequence(i)}")
+    a = int(input("Pick a number from 0 and 11"))
+    movies = Movies(a)
+    print(f"Movie recommendations: = {movies.list}")
