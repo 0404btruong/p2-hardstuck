@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+
+{% block content %}
 <head>
     <title>Chess board analysis</title>
     <meta charset="UTF-8">
@@ -25,6 +28,16 @@
         font-size:48px;
         line-height: 1.1em;
         }
+
+        .selected {
+        background-color: #D2042D;
+        border: none;
+        height: 80px;
+        width: 80px;
+        font-size:48px;
+        line-height: 1.1em;
+        }
+
 
         .even_black {
         background-color: #436FA5;
@@ -89,9 +102,14 @@
 
             </tr>
             <tr>
-                <td style="font-size:30px" >{{piece}}</td>
-                <form id="chessInputted" action="/minilab/david" method="POST" >
-                    <input name="chessPiece" id="chessPiece">
+                <td style="font-size:30px" >
+                    Valid inputs:
+                    <br><br>wp(1-8), WR(1-2), WN(1-2), WB(1-2), WQ(1-2), WK1
+                    <br>bp(1-8), BR(1-2), BN(1-2), BB(1-2), BQ(1-2), BK1&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <br><br>Current piece being analyzed: {{piece}}
+                </td>
+                <form id="chessInputted" action="/people/David/minilab" method="POST" >
+                    <input type="text" name="chessPiece" id="chessPiece" pattern="[wWbB][pRNBQK][0-9]{1}" maxlength="3" title="See below for valid inputs" required>
                     <button>Go!</button>
                 </form>
                 <br>
@@ -118,9 +136,13 @@
                             <!-- this is replacing with white space -->
                             <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp;  /></td>
                             {%else%}
-                            <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value={{unicode}}  /></td>
+                            <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value={{unicode}} /></td>
                             {% endif %}
                             {% endfor %}
+                            {% endif %}
+                            {% if header == space %}
+                            {print("hi")}
+                            <td><input  class = "selected" type ="submit" value={{unicode}} /></td>
                             {% endif %}
                         </tr>
                         {% endfor %}
@@ -136,12 +158,10 @@
 
                             <tr>
                                 <td style="font-size:30px" class="turn__values"><a style="color: blue"></a>
-                                    &nbsp&nbsp&nbsp&nbspYou selected {{piece}}, which is a {{chesspiece.piecename}} on {{chesspiece.space}}<br><br>
-                                    &nbsp&nbsp&nbsp&nbspIt is attacking {{chesspiece.attacking}} <br>&nbsp&nbsp&nbsp&nbspwhile defending {{chesspiece.defending}}<br><br>
-                                    &nbsp&nbsp&nbsp&nbspIt is being attacked by {{chesspiece.attacked_by}}<br>&nbsp&nbsp&nbsp&nbspwhile being defended by {{chesspiece.defended_by}}<br><br>
-                                    &nbsp&nbsp&nbsp&nbspThe value of a {{chesspiece.piecename}} is {{chesspiece.value}}
-
-
+                                    You selected {{piece}}, which is a {{chesspiece.piecename}} on {{chesspiece.space}}<br><br>
+                                    It is attacking {{chesspiece.attacking}} <br>while defending {{chesspiece.defending}}<br><br>
+                                    It is being attacked by {{chesspiece.attacked_by}}<br>while being defended by {{chesspiece.defended_by}}<br><br>
+                                    The value of a {{chesspiece.piecename}} is {{chesspiece.value}}
                                 </td>
                             </tr>
                         </table>
@@ -175,3 +195,5 @@ function instant_scroll(){
 }
 </script>
 </body>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from people.gavinsminilab import Superhero
+from people.Gavin.gavinsminilab import Superhero
 people_Gavin_bp = Blueprint('people_Gavin', __name__,
                           template_folder='templates',
                           static_folder='static', static_url_path='assets')
