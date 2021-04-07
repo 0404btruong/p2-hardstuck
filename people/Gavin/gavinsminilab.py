@@ -1,6 +1,5 @@
-from random import random
+import random
 
-from flask import render_template
 superherolist1= ["Superman", "Batman", "Ironman"]
 class Superhero:
     def __init__(self, number):
@@ -14,7 +13,7 @@ class Superhero:
 
     def superhero_series(self):
 
-        f = [(random((superherolist1), k=self._number))]
+        f = [(random.sample((superherolist1), k=self._number))]
 
         self.set_data(f[0])
         f = [f[0]]
@@ -41,7 +40,7 @@ class Superhero:
         return self._dict[nth]
 
 if __name__ == "__main__":
-    x = 2
+    x = 1
     superherobest = Superhero(x)
     print(f"Here are some awesome superheroes! = {superherobest.list}")
 
