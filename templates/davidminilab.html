@@ -1,36 +1,177 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
+    <title>Chess board analysis</title>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <table>
-        {%for row in board%}
-        <tr><!-- if row == board 5 -->
-            {% if loop.index is divisibleby 2 %} <!-- if the row is even, 8,6,4,2 -->
-            {% for header,unicode in row.items() %}
-            {% if unicode == "emptySpace" %}<!-- if there is emtySpace as the value of the dictonary -->
-            <!-- this is replacing with white space -->
-            <td><input class = "{{ loop.cycle('even', 'odd') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp; inputName="firstButton" formaction={{header}} /></td>
-            {%else%}
-            <td><input class = "{{ loop.cycle('even', 'odd') }}" type ="submit" value={{unicode}} inputName="firstButton" formaction={{header}} /></td>
-            {% endif %}
-            {% endfor %}
-            {% else %}
-            {% for header,unicode  in row.items() %}   <!-- if the row is odd, 7,5,3,1 -->
-            {% if unicode == "emptySpace" %}<!-- if there is emtySpace as the value of the dictonary -->
-            <!-- this is replacing with white space -->
-            <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp; inputName="firstButton" formaction={{header}} /></td>
-            {%else%}
-            <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value={{unicode}} inputName="firstButton" formaction={{header}} /></td>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-        </tr>
-        {% endfor %}
+    <style>
+            h1 {
+        text-align: center;
+        margin-top: 50px;
+        color: black;
+        font-size: 70px;
+        }
+        .even {
+        background-color: #436FA5;
+        border: none;
+        height: 80px;
+        width: 80px;
+        font-size:48px;
+        line-height: 1.1em;
+        }
 
-    </table>
+        .odd {
+        background-color: #ffffff;
+        border: none;
+        height: 80px;
+        width: 80px;
+        font-size:48px;
+        line-height: 1.1em;
+        }
+
+        .even_black {
+        background-color: #436FA5;
+        border: none;
+        color: black;
+        font-size:48px;
+        line-height: 1.1em;
+        }
+        .odd_black {
+        background-color: #ffffff;
+        border: none;
+        color: black;
+         font-size:48px;
+        line-height: 1.1em;
+        }
+        .even_white {
+        background-color: #436FA5;
+        border: none;
+        color: black;
+         font-size:48px;
+        line-height: 1.1em;
+        }
+        .odd_black {
+        background-color: #ffffff;
+        border: none;
+        color: black;
+         font-size:48px;
+        line-height: 1.1em;
+        }
+
+        .selected{
+        background-color: #FFFF00;
+        border: none;
+        }
+        .white {
+        color: black;
+        }
+        .black {
+        color: black;
+        }
+
+        #turn__table {
+
+            overflow: auto;
+        }
+        .turn__number {
+        text-align: center;
+        }
+        .turn__values {
+        text-align: left;
+        }
+
+
+    </style>
 </head>
-<body>
+<div class="banner">
+    <div class="container">
+        <h1>Analysis of a piece on a chess board</h1>
+        <body onLoad="scrollDiv_init()">
+        <table class="center__table">
+            <tr>
 
+            </tr>
+            <tr>
+                <td style="font-size:30px" >{{piece}}</td>
+                <form id="chessInputted" action="/minilab/david" method="POST" >
+                    <input name="chessPiece" id="chessPiece">
+                    <button>Go!</button>
+                </form>
+                <br>
+                <br>
+
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        {%for row in allboard%}
+                        <tr><!-- if row == board 5 -->
+                            {% if loop.index is divisibleby 2 %} <!-- if the row is even, 8,6,4,2 -->
+                            {% for header,unicode in row.items() %}
+                            {% if unicode == "  " %}<!-- if there is emtySpace as the value of the dictonary -->
+                            <!-- this is replacing with white space -->
+                            <td><input class = "{{ loop.cycle('even', 'odd') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp;  /></td>
+                            {%else%}
+                            <td><input class = "{{ loop.cycle('even', 'odd') }}" type ="submit" value={{unicode}}  /></td>
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            {% for header,unicode  in row.items() %}   <!-- if the row is odd, 7,5,3,1 -->
+                            {% if unicode == "  " %}<!-- if there is emtySpace as the value of the dictonary -->
+                            <!-- this is replacing with white space -->
+                            <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp;  /></td>
+                            {%else%}
+                            <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value={{unicode}}  /></td>
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                </td>
+                <td>
+                    <table>
+
+                    </table>
+                    <div id="turn__table">
+                        <table>
+
+                            <tr>
+                                <td style="font-size:30px" class="turn__values"><a style="color: blue"></a>
+                                    &nbsp&nbsp&nbsp&nbspYou selected {{piece}}, which is a {{chesspiece.piecename}} on {{chesspiece.space}}<br><br>
+                                    &nbsp&nbsp&nbsp&nbspIt is attacking {{chesspiece.attacking}} <br>&nbsp&nbsp&nbsp&nbspwhile defending {{chesspiece.defending}}<br><br>
+                                    &nbsp&nbsp&nbsp&nbspIt is being attacked by {{chesspiece.attacked_by}}<br>&nbsp&nbsp&nbsp&nbspwhile being defended by {{chesspiece.defended_by}}<br><br>
+                                    &nbsp&nbsp&nbsp&nbspThe value of a {{chesspiece.piecename}} is {{chesspiece.value}}
+
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+        </body>
+    </div>
+</div>
+
+
+<h1>{{ displayRoutes }}</h1> <!-- this line is for debuggin -->
+
+<img src="{{ displayImage }}"> <!-- this is to display the win image -->
+
+
+<script language="javascript">
+
+//this is what allows the tabel to continously update
+function scrollDiv_init() {
+    DivElmnt = document.getElementById('turn__table');
+      instant_scroll()
+}
+
+function instant_scroll(){
+  DivElmnt.scrollTop = DivElmnt.scrollHeight
+}
+</script>
 </body>
-</html>
