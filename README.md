@@ -7,7 +7,7 @@ Kian - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87
 
 David - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87fb50ec6e1ff71546/people/David/davidminilab.py
 
-Brandon - 
+Brandon - https://github.com/0404btruong/p2-hardstuck/blob/4af8d548e354586441ca427abdbe0dd0c2712fb6/people/Brandon/brandonminilab.py
 
 Gavin - https://github.com/0404btruong/p2-hardstuck/blob/4d39ad75f9c3af8f09a3ad87fb50ec6e1ff71546/people/Gavin/gavinsminilab.py
 
