@@ -30,6 +30,10 @@ def david_minilab():
     text_to_unicode = {"WR":"♖ ", "WN":"♘ ", "WB":"♗ ", "WQ":"♕ ", "WK":"♔ ", "wp":"♙ ", "  ":"  ",
                        "BR":"♜ ", "BN":"♞ ", "BB":"♝ ", "BQ":"♛ ", "BK":"♚ ", "bp":"♟ "}
     [[allboard[i].update({chr(k+97) + str(i+1):text_to_unicode[board[chr(k+97) + str(i+1)][0:2]]}) for k in range(8)] for i in range(8)]
+
+    '''for i in range(8):
+        for k in range(8):
+            allboard[i].update({chr(k+97) + str(i+1)})'''
     allboard.reverse()
     if request.form:
         return render_template("davidminilab.html", space=chesspiece.space, piece=piece, allboard=allboard, chesspiece=ChessPiece(board, piece))
