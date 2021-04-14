@@ -7,10 +7,7 @@ class ChessPiece:
             raise ValueError("Invalid Piece")
         self._piece = piece
         self._board = board
-        piecenamedict = {"wp":"white pawn", "bp":"black pawn", "WR":"white rook", "BR":"black rook",
-                         "WN":"white knight", "BN":"black knight", "WB":"white bishop", "BB":"black bishop",
-                         "WQ":"white queen", "BQ":"black queen", "WK":"white king", "BK":"black king"}
-        self._piecename = piecenamedict[piece[0:2]]
+        self._piecename = self.getname(piece)
         self._space = ""
         self._moveset = []
         self._attacking = []
@@ -22,10 +19,11 @@ class ChessPiece:
         self.storeboardset()
 
     def getname(self, piece1):
-        piecenamedict = {"wp":"white pawn", "bp":"black pawn", "WR":"white rook", "BR":"black rook",
-                         "WN":"white knight", "BN":"black knight", "WB":"white bishop", "BB":"black bishop",
-                         "WQ":"white queen", "BQ":"black queen", "WK":"white king", "BK":"black king"}
+        piecenamedict = {"wp": "white pawn", "bp": "black pawn", "WR": "white rook", "BR": "black rook",
+                         "WN": "white knight", "BN": "black knight", "WB": "white bishop", "BB": "black bishop",
+                         "WQ": "white queen", "BQ": "black queen", "WK": "white king", "BK": "black king"}
         return piecenamedict[piece1[0:2]]
+
     def storeboardset(self):
         board = dict(self._board)
         storeboard = {

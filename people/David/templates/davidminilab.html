@@ -93,19 +93,19 @@
 
     </style>
 </head>
+<body onLoad="scrollDiv_init()">
 <div class="banner">
     <div class="container">
         <h1>Analysis of a piece on a chess board</h1>
-        <body onLoad="scrollDiv_init()">
         <table class="center__table">
             <tr>
 
             </tr>
-            <tr>
+            <br>
                 <td style="font-size:30px" >
                     Valid inputs:
                     <br><br>wp(1-8), WR(1-2), WN(1-2), WB(1-2), WQ(1-2), WK1
-                    <br>bp(1-8), BR(1-2), BN(1-2), BB(1-2), BQ(1-2), BK1&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <br>bp(1-8), BR(1-2), BN(1-2), BB(1-2), BQ(1-2), BK1
                     <br>(First letter: color, second letter: piece, third letter: designation)
                     <br><br>Current piece being analyzed: {{piece}}
                 </td>
@@ -113,8 +113,6 @@
                     <input type="text" name="chessPiece" id="chessPiece" pattern="[wWbB][pRNBQK][0-9]{1}" maxlength="3" title="See below for valid inputs" required>
                     <button>Go!</button>
                 </form>
-                <br>
-                <br>
 
             </tr>
             <tr>
@@ -124,8 +122,7 @@
                         <tr><!-- if row == board 5 -->
                             {% if loop.index is divisibleby 2 %} <!-- if the row is even, 8,6,4,2 -->
                             {% for header,unicode in row.items() %}
-                            {% if unicode == "  " %}<!-- if there is emtySpace as the value of the dictonary -->
-                            <!-- this is replacing with white space -->
+                            {% if unicode == "  " %}<!-- blank space in dictionary replaced with html designation -->
                             <td><input class = "{{ loop.cycle('even', 'odd') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp;  /></td>
                             {%else%}
                             <td><input class = "{{ loop.cycle('even', 'odd') }}" type ="submit" value={{unicode}}  /></td>
@@ -133,8 +130,7 @@
                             {% endfor %}
                             {% else %}
                             {% for header,unicode  in row.items() %}   <!-- if the row is odd, 7,5,3,1 -->
-                            {% if unicode == "  " %}<!-- if there is emtySpace as the value of the dictonary -->
-                            <!-- this is replacing with white space -->
+                            {% if unicode == "  " %}<!-- blank space in dictionary replaced with html designation -->
                             <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value=&nbsp;&nbsp;&nbsp;&nbsp;  /></td>
                             {%else%}
                             <td><input  class = "{{ loop.cycle('odd', 'even') }}" type ="submit" value={{unicode}} /></td>
@@ -142,12 +138,10 @@
                             {% endfor %}
                             {% endif %}
                             {% if header == space %}
-                            {print("hi")}
                             <td><input  class = "selected" type ="submit" value={{unicode}} /></td>
                             {% endif %}
                         </tr>
                         {% endfor %}
-
                     </table>
                 </td>
                 <td>
@@ -162,7 +156,7 @@
                                     You selected {{piece}}, which is a {{chesspiece.piecename}} on {{chesspiece.space}}<br><br>
                                     It is attacking {{chesspiece.attacking}} <br>while defending {{chesspiece.defending}}<br><br>
                                     It is being attacked by {{chesspiece.attacked_by}}<br>while being defended by {{chesspiece.defended_by}}<br><br>
-                                    The value of a {{chesspiece.piecename}} is {{chesspiece.value}}
+                                    The value of a {{chesspiece.piecename}} is {{chesspiece.value}} points
                                 </td>
                             </tr>
                         </table>
@@ -173,7 +167,6 @@
 
             </tr>
         </table>
-        </body>
     </div>
 </div>
 
