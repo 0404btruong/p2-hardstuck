@@ -1,4 +1,7 @@
 from flask import Flask, Blueprint, render_template, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import(current_user, LoginManager, login_user, logout_user, login_required, UserMixin)
+from werkzeug.security import generate_password_hash, check_password_hash
 from people import people_bp
 from people.prep import people_prep_bp
 from people.David import people_David_bp, davidminilab
@@ -7,7 +10,12 @@ from people.Kian import people_Kian_bp
 from people.Gavin import people_Gavin_bp
 from people.David.davidminilab import ChessPiece
 
+dbURI ='sqlite:///authuser.sqlite3'
+
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URL'] = dbURI
+app.config['SECRET_KEY'] = 'my_secret_key'
+db = SQLAlchemy(app)
 app.register_blueprint(people_bp, url_prefix='/people/repos')
 app.register_blueprint(people_prep_bp, url_prefix='/people/prep')
 app.register_blueprint(people_David_bp, url_prefix='/people/David')
@@ -15,6 +23,26 @@ app.register_blueprint(people_Brandon_bp, url_prefix='/people/Brandon')
 app.register_blueprint(people_Kian_bp, url_prefix='/people/Kian')
 app.register_blueprint(people_Gavin_bp, url_prefix='/people/Gavin')
 
+class AuthUser(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(50))
+    password = db.Column(db.String(500))
+    email = db.Column(db.String(50))
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password, method='sha256')
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def to_json(self):
+        return {"name": self.name,
+                "email": self.email}
+
+    def __init__(self, name, password, email):
+        self.name = name
+        self.password = password
+        self.email = email
 
 @app.route('/')
 def index():
