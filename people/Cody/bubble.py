@@ -1,17 +1,18 @@
-a = []
+def bubbleSort(arr):
+    n = len(arr)
 
-# List of int with user input
+    for i in range(n-1):
 
-number = int(input("Number of Elements : "))
-for i in range(number):
-    value = int(input("Please enter the %d Element of List1 : " %i))
-    a.append(value)
+        for j in range(0, n-i-1):
 
-for i in range(number -1):
-    for j in range(number - i - 1):
-        if(a[j] > a[j + 1]):
-            temp = a[j]
-            a[j] = a[j + 1]
-            a[j + 1] = temp
+            if arr[j] > arr[j+1] :
+                arr[j], arr[j+1] = arr[j+1], arr[j]
 
-print("Sorted list: ", a)
+
+arr = [75, 37, 21, 4, 7, 45]
+
+bubbleSort(arr)
+
+print ("Sorted array is:")
+for i in range(len(arr)):
+    print ("%d" %arr[i]),
