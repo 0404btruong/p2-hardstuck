@@ -1,14 +1,16 @@
-from flask import Flask, Blueprint, render_template, request
+from flask import Flask, render_template
+from flask_login import (UserMixin)
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import(current_user, LoginManager, login_user, logout_user, login_required, UserMixin)
 from werkzeug.security import generate_password_hash, check_password_hash
+
 from people import people_bp
-from people.prep import people_prep_bp
-from people.David import people_David_bp, davidminilab
 from people.Brandon import people_Brandon_bp
-from people.Kian import people_Kian_bp
+from people.David import people_David_bp
 from people.Gavin import people_Gavin_bp
-from people.David.davidminilab import ChessPiece
+from people.Kian import people_Kian_bp
+from people.Cody import people_Cody_bp
+from people.prep import people_prep_bp
+
 
 dbURI ='sqlite:///authuser.sqlite3'
 
