@@ -110,7 +110,7 @@
                     <br><br>Current piece being analyzed: {{piece}}
                 </td>
                 <form id="chessInputted" action="/people/David/minilab" method="POST" >
-                    <input type="text" name="chessPiece" id="chessPiece" pattern="[wWbB][pRNBQK][0-9]{1}" maxlength="3" title="See below for valid inputs" required>
+                    <input type="text" name="chessPiece" id="chessPiece" pattern="[wWbB][pRNBQK][1-8]{1}" maxlength="3" title="See below for valid inputs" required>
                     <button>Go!</button>
                 </form>
 
@@ -152,13 +152,16 @@
                         <table>
 
                             <tr>
+
                                 <td style="font-size:30px" class="turn__values"><a style="color: blue"></a>
                                     You selected {{piece}}, which is a {{chesspiece.piecename}} on {{chesspiece.space}}<br><br>
                                     It is attacking {{chesspiece.attacking}} <br>while defending {{chesspiece.defending}}<br><br>
                                     It is being attacked by {{chesspiece.attacked_by}}<br>while being defended by {{chesspiece.defended_by}}<br><br>
                                     The value of a {{chesspiece.piecename}} is {{chesspiece.value}} points
                                 </td>
+
                             </tr>
+
                         </table>
                     </div>
                 </td>

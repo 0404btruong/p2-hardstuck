@@ -1,0 +1,158 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<head>
+    <title>Bubble Sort minilab</title>
+    <meta charset="UTF-8">
+    <style>
+            h1 {
+        text-align: center;
+        margin-top: 50px;
+        color: black;
+        font-size: 70px;
+        }
+        .even {
+        background-color: #436FA5;
+        border: none;
+        height: 80px;
+        width: 80px;
+        font-size:48px;
+        line-height: 1.1em;
+        }
+
+        .odd {
+        background-color: #ffffff;
+        border: none;
+        height: 80px;
+        width: 80px;
+        font-size:48px;
+        line-height: 1.1em;
+        }
+
+        .selected {
+        background-color: #D2042D;
+        border: none;
+        height: 80px;
+        width: 80px;
+        font-size:48px;
+        line-height: 1.1em;
+        }
+
+
+        .even_black {
+        background-color: #436FA5;
+        border: none;
+        color: black;
+        font-size:48px;
+        line-height: 1.1em;
+        }
+        .odd_black {
+        background-color: #ffffff;
+        border: none;
+        color: black;
+         font-size:48px;
+        line-height: 1.1em;
+        }
+        .even_white {
+        background-color: #436FA5;
+        border: none;
+        color: black;
+         font-size:48px;
+        line-height: 1.1em;
+        }
+        .odd_black {
+        background-color: #ffffff;
+        border: none;
+        color: black;
+         font-size:48px;
+        line-height: 1.1em;
+        }
+
+        .selected{
+        background-color: #FFFF00;
+        border: none;
+        }
+        .white {
+        color: black;
+        }
+        .black {
+        color: black;
+        }
+
+        #turn__table {
+
+            overflow: auto;
+        }
+        .turn__number {
+        text-align: center;
+        }
+        .turn__values {
+        text-align: left;
+        }
+
+
+    </style>
+</head>
+<body onLoad="scrollDiv_init()">
+<div class="banner">
+    <div class="container">
+        <h1>Bubble sorting any length of a list</h1>
+        <table class="center__table">
+            <tr>
+
+            </tr>
+            <br>
+            <td style="font-size:30px" >
+                <br>The original list {{original_array}}
+                <br>was sorted in {{rounds}} rounds by the bubble sort method.
+                <br>
+                <br>
+            </td>
+            <form id="custom_sizeInputted" action="/people/David/minilab2/characters" method="POST" >
+                <input type="number" name="custom_size" id="custom_size" min="1" max="1000" title="Enter a number from 1-999" required>
+                <button>Go!</button>
+            </form>
+            <th>
+            </th>
+            <tr>
+                <td>
+                    <table>
+                        {% for row in table_ %}
+                        <tr>
+                            {% for number in row %}
+                            <td><input type ="submit" value={{number}} /></td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+            </tr>
+            </td>
+            <tr>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<h1>{{ displayRoutes }}</h1> <!-- this line is for debuggin -->
+
+<img src="{{ displayImage }}"> <!-- this is to display the win image -->
+
+
+<script language="javascript">
+
+//this is what allows the tabel to continously update
+function scrollDiv_init() {
+    DivElmnt = document.getElementById('turn__table');
+      instant_scroll()
+}
+
+function instant_scroll(){
+  DivElmnt.scrollTop = DivElmnt.scrollHeight
+}
+</script>
+</body>
+
+{% endblock %}
