@@ -24,7 +24,7 @@ app.register_blueprint(people_David_bp, url_prefix='/people/David')
 app.register_blueprint(people_Brandon_bp, url_prefix='/people/Brandon')
 app.register_blueprint(people_Kian_bp, url_prefix='/people/Kian')
 app.register_blueprint(people_Gavin_bp, url_prefix='/people/Gavin')
-
+"""
 class AuthUser(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50))
@@ -45,7 +45,7 @@ class AuthUser(UserMixin, db.Model):
         self.name = name
         self.password = password
         self.email = email
-
+"""
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -70,6 +70,14 @@ def page_not_found(e):
 
 if __name__ == "__main__":
     # runs the application on the repl development server
+    """
+    AuthUser.query.delete()
+    user1 = AuthUser("John", generate_password_hash('password1', method='sha256'), "John@gmail.com")
+    user2 = AuthUser("Paul", generate_password_hash('password2', method="sha256"), "Paul@gmail.com")
+    db.session.add(user1)
+    db.session.add(user2)
+    db.session.commit()
+    """
     app.run(debug=True, port="5001")
 
 
