@@ -20,6 +20,9 @@ def stringSort(stringInput):
 
 if __name__ == '__main__':
     userinput = [5, 3, 8, 6, 7, 2, 9]
-    print("before", userinput)
+    stringInput = "flower, palm, find, run, banana, cup"
+    print("start", userinput)
     numberSort(userinput)
-    print("after", userinput)
+    print("finish", userinput)
+    print("beginning string", stringInput)
+    stringSort(stringInput)

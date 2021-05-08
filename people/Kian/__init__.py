@@ -14,9 +14,8 @@ def index():
 @people_Kian_bp.route('/bubblesort',methods=['GET', 'POST'])
 
 def bubblesort():
-    #before = request.form.get('wordslist')
-    before = [1, 4, 7, 3, 5]
+    start = [1, 4, 7, 3, 5]
     if request.method=='POST':
         before = [int(n) for n in request.args.get("numList")]
-    return render_template("bubblesort.html", before=before, after=numberSort(before))
+    return render_template("bubblesort.html", start=start, finish=numberSort(start))
 
