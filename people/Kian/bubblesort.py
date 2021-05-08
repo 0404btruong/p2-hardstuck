@@ -24,5 +24,5 @@ if __name__ == '__main__':
     print("start", userinput)
     numberSort(userinput)
     print("finish", userinput)
-    print("beginning string", stringInput)
+    print("beginning string:", stringInput)
     stringSort(stringInput)
