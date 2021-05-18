@@ -129,12 +129,12 @@ def signup():
 if __name__ == "__main__":
     # runs the application on the repl development server
 
-    AuthUser.query.delete()
+    """AuthUser.query.delete()
     user1 = AuthUser("John", generate_password_hash('password1', method='sha256'), "John@gmail.com")
     user2 = AuthUser("Paul", generate_password_hash('password2', method="sha256"), "Paul@gmail.com")
     db.session.add(user1)
     db.session.add(user2)
-    db.session.commit()
+    db.session.commit()"""
 
     app.run(debug=True, port="5001")
 
