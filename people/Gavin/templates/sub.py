@@ -9,14 +9,13 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
-@app.route('/email', methods = ['POST'])
+@app.route('/email', methods = ['GET','POST'])
 def email():
     email = request.form['email']
-    email_text = 'Subject: {}\n\n{}'.format("United States Data", 'United States Total Cases 24,983,892; Total Deaths 2,080,972; Current Active Cases 25,361,201 ')
+    email_text = 'Subject: {}\n\n{}'.format("P2Hardstucks MUSIC APP", 'THANK YOU FOR SUBSCRIBING TO OUR MUSIC APP')
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.ehlo()
-    server.login('p2hardstuck@gmail.com', 'MrMadman33')
-    server.sendmail('wildcatsp4@gmail.com', email, email_text)
+    server.login('P2Hardstucks@gmail.com', 'morty1234')
+    server.sendmail('P2Hardstucks@gmail.com', email, email_text)
     server.close()
     print ("email sent to:", email)
     return render_template("home.html")
