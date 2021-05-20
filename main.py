@@ -73,11 +73,12 @@ def email():
     if request.method == 'POST':
         email = request.form['email']
         email_text = 'Subject: {}\n\n{}'.format("MUSIC APP", 'THANK YOU FOR SUBSCRIBING TO THE P2HARDSTUCK MUSIC APP')
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465, context = ssl.create_default_context())
-        server.login('P2Hardstuck@gmail.com', 'morty1234')
-        server.sendmail('P2Hardstuck@gmail.com', email, email_text)
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465,context=ssl.create_default_context())
+        server.login('p2hardstuck@gmail.com', 'CompSci1234!')
+        server.sendmail('p2hardstuck@gmail.com', email, email_text)
         server.close()
         print ("email sent to:", email)
+        return render_template("sub.html")
     else:
         return render_template("email.html")
 
