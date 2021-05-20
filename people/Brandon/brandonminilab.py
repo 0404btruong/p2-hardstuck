@@ -1,5 +1,5 @@
 class RandomAlgebra:
-    """Initializer of class takes series parameter and returns Class Objectg"""
+    """Initializer of class takes series parameter and returns Class Objects"""
     def __init__(self, series):
         """Built in validation and exception"""
         if series < 0 or series > 100 :
@@ -10,17 +10,17 @@ class RandomAlgebra:
         self._dictID = 0
         # Duration timeElapsed;
         # Instant start = Instant.now();  // time capture -- start
-        self.random_algebra()
+        self.random_series()
         # Instant end = Instant.now();    // time capture -- end
         # this.timeElapsed = Duration.between(start, end);
 
-    """Algorithm for building Fibonacci sequence, this id called from __init__"""
-    def calc_series(self):
+    """Algorithm for building random algebra, this id called from __init__"""
+    def random_series(self):
         limit = self._series
-        f = [0, 1]  # fibonacci starting array/list
+        f = [0]  # random starting array/list
         while limit > 0:
             self.set_data(f[0])
-            f = [f[1], f[0] + f[1]]
+            f = [f[2] * f[1] + f[10] / f[3]]
             limit -= 1
 
     """Method/Function to set Fibonacci data: list, dict, and dictID are instance variables of Class"""
@@ -50,14 +50,14 @@ class RandomAlgebra:
 # Tester Code
 if __name__ == "__main__":
     '''Value for testing'''
-    n = 30
+    n = 1
     '''Constructor of Class object'''
-    fibonacci = Fibonacci(n)
+    random = RandomAlgebra(n)
 
     '''Using getters to obtain data from object'''
-    print(f"Fibonacci number for {n} = {fibonacci.number}")
-    print(f"Fibonacci series for {n} = {fibonacci.list}")
+    print(f"random number for {n} = {random.number}")
+    print(f"random series for {n} = {random.list}")
 
     '''Using method to get data from object'''
     for i in range(n):
-        print(f"Fibonacci sequence {i + 1} = {fibonacci.get_sequence(i)}")
+        print(f"random sequence {i + 1} = {random.get_sequence(i)}")
