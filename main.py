@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_login import (UserMixin)
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -10,6 +10,7 @@ from people.Gavin import people_Gavin_bp
 from people.Kian import people_Kian_bp
 from people.Cody import people_Cody_bp
 from people.prep import people_prep_bp
+import smtplib, ssl
 
 
 dbURI ='sqlite:///authuser.sqlite3'
@@ -24,7 +25,7 @@ app.register_blueprint(people_David_bp, url_prefix='/people/David')
 app.register_blueprint(people_Brandon_bp, url_prefix='/people/Brandon')
 app.register_blueprint(people_Kian_bp, url_prefix='/people/Kian')
 app.register_blueprint(people_Gavin_bp, url_prefix='/people/Gavin')
-"""
+
 class AuthUser(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50))
@@ -45,7 +46,7 @@ class AuthUser(UserMixin, db.Model):
         self.name = name
         self.password = password
         self.email = email
-"""
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -67,17 +68,23 @@ def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
+@app.route('/email', methods = ['GET','POST'])
+def email():
+    if request.method == 'POST':
+        email = request.form['email']
+        email_text = 'Subject: {}\n\n{}'.format("MUSIC APP", 'THANK YOU FOR SUBSCRIBING TO THE P2HARDSTUCK MUSIC APP')
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465,context=ssl.create_default_context())
+        server.login('p2hardstuck@gmail.com', 'CompSci1234!')
+        server.sendmail('p2hardstuck@gmail.com', email, email_text)
+        server.close()
+        print ("email sent to:", email)
+        return render_template("sub.html")
+    else:
+        return render_template("email.html")
+
 
 if __name__ == "__main__":
     # runs the application on the repl development server
-    """
-    AuthUser.query.delete()
-    user1 = AuthUser("John", generate_password_hash('password1', method='sha256'), "John@gmail.com")
-    user2 = AuthUser("Paul", generate_password_hash('password2', method="sha256"), "Paul@gmail.com")
-    db.session.add(user1)
-    db.session.add(user2)
-    db.session.commit()
-    """
     app.run(debug=True, port="5001")
 
 
