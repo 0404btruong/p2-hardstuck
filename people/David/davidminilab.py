@@ -15,8 +15,11 @@ class ChessPiece:
         self._attacked_by = []
         self._defended_by = []
         self._value = 0
+        self._list_of_pieces = [str(piece) for piece in board.values() if piece != "  "]
 
-        self.storeboardset()
+        if self._piece in self._list_of_pieces:
+            self.storeboardset()
+
 
     def getname(self, piece1):
         piecenamedict = {"wp": "white pawn", "bp": "black pawn", "WR": "white rook", "BR": "black rook",
@@ -44,14 +47,14 @@ class ChessPiece:
             if piece != '  ':
                 storeboard1 = dict(storeboard)
                 storeboard = dict(piecefunc[piece](dict(board), dict(storeboard), board[i], i[0], int(i[1])))
-        dictionary = {
+        movelist = {
             "bp1": [], "bp2": [], "bp3": [], "bp4": [], "bp5": [], "bp6": [], "bp7": [], "bp8": [],
             "BR1": [], "BN1": [], "BB1": [], "BQ1": [], "BK1": [], "BB2": [], "BN2": [], "BR2": [],
             "WR1": [], "WN1": [], "WB1": [], "WQ1": [], "WK1": [], "WB2": [], "WN2": [], "WR2": [],
             "wp1": [], "wp2": [], "wp3": [], "wp4": [], "wp5": [], "wp6": [], "wp7": [], "wp8": []}
         for i in storeboard:
             for k in storeboard[i]:
-                dictionary[k[0:3]].append(i)
+                movelist[k[0:3]].append(i)
         protdict = {
             "bp1": [], "bp2": [], "bp3": [], "bp4": [], "bp5": [], "bp6": [], "bp7": [], "bp8": [],
             "BR1": [], "BN1": [], "BB1": [], "BQ1": [], "BK1": [], "BB2": [], "BN2": [], "BR2": [],
@@ -69,21 +72,24 @@ class ChessPiece:
                 protdict = kingprot(board, protdict, board[i][0:3], i[0], int(i[1]), storeboard)
         
         # setting values
-        self._moveset = dictionary[self._piece]
+        self._moveset = movelist[self._piece]
         for i in self._moveset:
             if board[i][0].lower() != self._piece[0].lower() and board[i][0].lower() != " ":
                 self._attacking.append(board[i])
         for i in storeboard[self._space]:
             if i[0].lower() != self._piece[0].lower():
                 self._attacked_by.append(i)
-        self._defending = protdict[self._piece]
+        self._defended_by = protdict[self._piece]
         for k,v in protdict.items():
             if self._piece in v:
-                self._defended_by.append(k)
+                self._defending.append(k)
 
         value_dictionary = {"p":1, "r":5, "n":3, "b":3, "q":9 ,"k":104}
         self._value = value_dictionary[self._piece[1].lower()]
 
+    @property
+    def list_of_pieces(self):
+        return self._list_of_pieces
     @property
     def piecename(self):
         return self._piecename
@@ -1451,3 +1457,4 @@ if __name__ == "__main__":
     print(f"It is attacking {chesspiece.attacking} while defending {chesspiece.defending}")
     print(f"It is being attacked by {chesspiece.attacked_by} while being defended by {chesspiece.defended_by}")
     print(f"The value of a {chesspiece.piecename} is {chesspiece.value}")
+    print(chesspiece.list_of_pieces)

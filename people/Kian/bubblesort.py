@@ -5,6 +5,7 @@ def numberSort(userinput):
                 temp = userinput[j]
                 userinput[j] = userinput[j + 1]
                 userinput[j + 1] = temp
+    return userinput
 
 def stringSort(stringInput):
   words = [word.lower() for word in stringInput.split()]

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from flask import Flask, redirect, url_for, render_template, request
 from people.Kian.bubblesort import numberSort
+from random import randint
 
 people_Kian_bp = Blueprint('people_kian', __name__,
                           template_folder='templates',
@@ -15,7 +16,7 @@ def index():
 
 def bubblesort():
     start = [1, 4, 7, 3, 5]
-    if request.method=='POST':
-        before = [int(n) for n in request.args.get("numList")]
+    if request.method == 'POST':
+        start = [randint(0,1000) for n in range(int(request.form.get("numList")))]
     return render_template("bubblesort.html", start=start, finish=numberSort(start))
 
