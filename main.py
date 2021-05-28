@@ -62,6 +62,12 @@ def soundcloud():
 @app.route('/spotify')
 def spotify():
     return render_template("spotify.html")
+@app.route('/signup')
+def signup():
+    return render_template("signup.html")
+@app.route('/login')
+def login():
+    return render_template("login.html")
 
 @app.errorhandler(404)
 def page_not_found(e):
