@@ -25,6 +25,7 @@ app.register_blueprint(people_David_bp, url_prefix='/people/David')
 app.register_blueprint(people_Brandon_bp, url_prefix='/people/Brandon')
 app.register_blueprint(people_Kian_bp, url_prefix='/people/Kian')
 app.register_blueprint(people_Gavin_bp, url_prefix='/people/Gavin')
+app.register_blueprint(people_Cody_bp, url_prefix='/people/Cody')
 
 class AuthUser(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -62,6 +63,12 @@ def soundcloud():
 @app.route('/spotify')
 def spotify():
     return render_template("spotify.html")
+@app.route('/signup')
+def signup():
+    return render_template("signup.html")
+@app.route('/login')
+def login():
+    return render_template("login.html")
 
 @app.errorhandler(404)
 def page_not_found(e):
