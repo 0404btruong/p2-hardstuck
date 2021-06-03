@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from flask_login import (UserMixin)
+from flask_login import UserMixin, LoginManager, login_required
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -26,6 +26,16 @@ app.register_blueprint(people_Brandon_bp, url_prefix='/people/Brandon')
 app.register_blueprint(people_Kian_bp, url_prefix='/people/Kian')
 app.register_blueprint(people_Gavin_bp, url_prefix='/people/Gavin')
 app.register_blueprint(people_Cody_bp, url_prefix='/people/Cody')
+
+#starting logins
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+@login_manager.user_loader
+def load_user(user_id):
+    return AuthUser.query.get(user_id)
+
+
 
 class AuthUser(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -63,9 +73,11 @@ def soundcloud():
 @app.route('/spotify')
 def spotify():
     return render_template("spotify.html")
+
 @app.route('/signup')
 def signup():
     return render_template("signup.html")
+
 @app.route('/login')
 def login():
     return render_template("login.html")

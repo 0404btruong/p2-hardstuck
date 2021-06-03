@@ -10,10 +10,24 @@ body {background-color: turquoise;}
 label {color: black;}
 </style>
 </head>
+
 <body>
-<label for="username">username</label>
-<input type="text" name="username" id="username">
-<label for="password">password</label>
-<input type="text" name="password" id="password">
+<div id="contact" class="container-fluid bg-grey">
+
+    <form action="/authuser" method = "post">
+
+        <div class="container">
+            <h2>Login</h2>
+        </div>
+
+        <input type="text" placeholder="Username" name="name" required>
+        <input type="text" placeholder="password" name="password" required>
+        <input type="submit" value="login">
+
+
+
+    </form>
+</div>
 </body>
+
 </html>
