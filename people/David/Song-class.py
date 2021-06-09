@@ -1,5 +1,6 @@
 import requests
 
+
 class Song:
     def __init__(self, song_id, header):
         self._song_id = song_id
@@ -14,7 +15,7 @@ class Song:
         song_name = spotify_song["album"]["tracks"]["name"]
         artist = spotify_song["album"]["artists"]["name"]
         album = spotify_song["album"]["name"]
-        genre = 'filler'
+        genre = 'filler'  # is this necessary?
         length = spotify_song_audio["duration_ms"]
         listeners = 'filler'
         release_date = spotify_song["album"]["release_date"]
@@ -93,3 +94,4 @@ if __name__ == "__main__":
     Spotify = Song(song_id, header)
     print(f"{Spotify.song_name} has the id of {Spotify.id}")
     print(f"It was created by {Spotify.artist} in the album {Spotify.album}")
+    print()

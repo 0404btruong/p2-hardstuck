@@ -1,17 +1,19 @@
+import smtplib
+import ssl
+
+import requests
 from flask import Flask, render_template, request
-from flask_login import UserMixin, LoginManager, login_required
+from flask_login import UserMixin, LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from people import people_bp
 from people.Brandon import people_Brandon_bp
+from people.Cody import people_Cody_bp
 from people.David import people_David_bp
 from people.Gavin import people_Gavin_bp
 from people.Kian import people_Kian_bp
-from people.Cody import people_Cody_bp
 from people.prep import people_prep_bp
-import smtplib, ssl
-
 
 dbURI ='sqlite:///authuser.sqlite3'
 
@@ -36,7 +38,6 @@ def load_user(user_id):
     return AuthUser.query.get(user_id)
 
 
-
 class AuthUser(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50))
@@ -58,9 +59,20 @@ class AuthUser(UserMixin, db.Model):
         self.password = password
         self.email = email
 
-@app.route('/')
-def index():
-    return render_template("index.html")
+@app.route('/x')
+def inde():
+    headers1 = {'Authorization': 'db1bcf13c1c3'}
+    headers2 = {'client_id': '239', 'redirect_uri': 'https://soundcloud.com', 'response_type': 'code', 'scope': 'default'}
+    headers3 = {'key1': 'db&data'}
+    headers4 = {'Authorization': 'ea02849ff83b'}
+    spotify = requests.get("https://api.spotify.com/", headers=headers1)
+    soundcloud = requests.get("https://api.soundcloud.com/", headers=headers2)
+    itunes = requests.get("https://api.itunes.com/", headers=headers3)
+    youtube = requests.get("https://www.googleapis.com/youtube/v3/", headers=headers4)
+
+    top_music = [spotify["top"]["name"][0:3], soundcloud["top"]["all"]["title"][0:3], itunes["top"]["all"][0:3], youtube["music"]["leaderboard"]["all"]["name"][0:3]]
+
+    return render_template("index.html", top_music=top_music, spotify=spotify, soundcloud=soundcloud, itunes=itunes, youtube=youtube)
 
 @app.route('/itunes')
 def itunes():
@@ -101,6 +113,11 @@ def email():
     else:
         return render_template("email.html")
 
+@app.route('/')
+def index():
+    top_music = [["Into the Thick of it", "Talking to the Moon", "Peaches"], ["Into the Thick of it", "Peaches", "Besides you"], ["Into the Thick of it", "Talking to the Moon", "Peaches"], ["Into the Thick of it", "Peaches", "Besides you"], ["Talking to the Moon", "Peaches", "Champaign and Sunshine"]]
+
+    return render_template("index.html", top_music=top_music)
 
 if __name__ == "__main__":
     # runs the application on the repl development server
