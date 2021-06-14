@@ -4,7 +4,7 @@
 
 {% block content %}
 <style>
-table, th, td {border: 1px solid black; padding: 5px; border-spacing:30px;}
+table, th, td {border: 1px solid black; padding: 5px; border-spacing:30px;background-color: turquoise}
 body {background: linear-gradient(to bottom left, #00ffff 0%, #ffcc00 81%)}
 </style>
 <div class="center-block" style="margin: 2% 10% 10%;">
@@ -26,11 +26,11 @@ body {background: linear-gradient(to bottom left, #00ffff 0%, #ffcc00 81%)}
 <div class="center">
         <table class="center-block" style="margin: 0% 25% 25%;">
             <tr>
-                <th>Spotify</th>
-                <th>Soundcloud</th>
-                <th>iTunes</th>
-                <th>Youtube Music</th>
-                <th>Google Music</th>
+                <th style="background-color: green">Spotify</th>
+                <th style="background-color: orange">Soundcloud</th>
+                <th style="background-color: #ff5349">iTunes</th>
+                <th style="background-color: #ff5349">Youtube Music</th>
+                <th style="background-color: #ff5349">Google Play Music</th>
             </tr>
             <tr>
                 <td>{{top_music[0][0]}}</td>
