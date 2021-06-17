@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+
+{% block content %}
+<style>
+table, th, td {border: 1px solid black; padding: 5px; border-spacing:30px;background-color: turquoise}
+body {background: linear-gradient(to bottom left, #00ffff 0%, #ffcc00 81%)}
+</style>
+<div class="center-block" style="margin: 2% 10% 10%;">
+    <div class="col-12" style="text-align: center;">
+        <h1><strong>Look up a song!</strong></h1>
+    </div>
+    <br>
+    <td style="font-size:30px" >
+        You can look up any song given that it is not too recent
+        <br>Input the name of the song (case sensitive), then the artist
+    </td>
+    <form id="songlookup" action="/songlookup/result" method="POST" >
+        <input type="text" name="lookupsong" id="lookupsong" required>
+        <input type="text" name="lookupartist" id="lookupartist" required>
+        <button>Go!</button>
+    </form>
+    <div class="jumbotron text-left row">
+        <div class="col-md-9">
+            <h3>
+                <strong>{{songdata["track"][0]["strTrack"]}}</strong>
+                <br>The song {{songdata["track"][0]["strTrack"]}} is performed by {{songdata["track"][0]["strArtist"]}}.
+                Its genre is {{songdata["track"][0]["strGenre"]}} and it is from the album {{songdata["track"][0]["strAlbum"]}}.
+                <br>Summary:
+                <br>{{songdata["track"][0]["strDescriptionEN"]}}
+            </h3>
+        </div>
+    </div>
+</div>
+{% endblock %}

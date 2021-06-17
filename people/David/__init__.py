@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request
 from random import randint
 from people.David.davidminilab import ChessPiece
 from people.David.davidminilab2 import bubble_sort, bubble_sort_characters
+from myglobals import most_loved_50
 
 people_David_bp = Blueprint('people_David', __name__,
                           template_folder='templates',
@@ -10,7 +11,7 @@ people_David_bp = Blueprint('people_David', __name__,
 
 @people_David_bp.route('/')
 def index():
-    return render_template("course/timelines.html", padlet="https://padlet.com/jmortensen7/csptime1_2")
+    return render_template("davidhome.html", most_loved_50=most_loved_50)
 
 @people_David_bp.route('/minilab', methods=["GET", "POST"])
 def david_minilab():

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+
+{% block content %}
+<style>
+table, th, td {border: 1px solid black; padding: 5px; border-spacing:30px;background-color: turquoise}
+body {background: linear-gradient(to bottom left, #00ffff 0%, #ffcc00 81%)}
+</style>
+<div class="center-block" style="margin: 2% 10% 10%;">
+    <div class="col-12" style="text-align: center;">
+        <h1><strong>David Kim <a style="color:red">[5/5]</a></td></strong></h1>
+    </div>
+
+    <div class="jumbotron text-left row">
+        <div class="col-md-9">
+            <h3><strong>Technicals</strong>
+                <br>Recommended songs to listen to <td><a style="color:red">(on homepage)[+0.5]</a></td>
+                <br>Artist Quiz, both frontend and backend <td><a style="color:red">(on homepage) [+1]</a></td>
+                <br>Song lookup, both frontend and backend <td><a style="color:red">(on homepage) [+1]</a></td>
+                <br>Button access from homepage to user interaction <td><a style="color:red">(on homepage) [+0.5]</a></td>
+
+                <br><br><strong>Mini Labs</strong>
+                <br>Classes minilab: Chess piece information calculation <a style="color:red">[+1]</a></td>
+                <br><td><a style="color:blue" href="minilab">Link</a></td>
+                <br><br>Bubble sort minilab: Showing progression of bubble sort <a style="color:red">[+1]</a></td>
+                <br><td><a style="color:blue" href="minilab2">Link</a></td>
+                <br><td><a style="color:blue" href="minilab2/characters">Link for character sort</a></td>
+            </h3>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+{% endblock %}

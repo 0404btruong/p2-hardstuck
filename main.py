@@ -1,5 +1,6 @@
 import smtplib
 import ssl
+import json
 
 import requests
 from flask import Flask, render_template, request
@@ -14,8 +15,10 @@ from people.David import people_David_bp
 from people.Gavin import people_Gavin_bp
 from people.Kian import people_Kian_bp
 from people.prep import people_prep_bp
+from random import randint
+from myglobals import most_loved_50
 
-dbURI ='sqlite:///authuser.sqlite3'
+dbURI = 'sqlite:///authuser.sqlite3'
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URL'] = dbURI
@@ -29,17 +32,19 @@ app.register_blueprint(people_Kian_bp, url_prefix='/people/Kian')
 app.register_blueprint(people_Gavin_bp, url_prefix='/people/Gavin')
 app.register_blueprint(people_Cody_bp, url_prefix='/people/Cody')
 
-#starting logins
+# starting logins
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return AuthUser.query.get(user_id)
 
 
 class AuthUser(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     password = db.Column(db.String(500))
     email = db.Column(db.String(50))
@@ -59,68 +64,101 @@ class AuthUser(UserMixin, db.Model):
         self.password = password
         self.email = email
 
-@app.route('/x')
-def inde():
-    headers1 = {'Authorization': 'db1bcf13c1c3'}
-    headers2 = {'client_id': '239', 'redirect_uri': 'https://soundcloud.com', 'response_type': 'code', 'scope': 'default'}
-    headers3 = {'key1': 'db&data'}
-    headers4 = {'Authorization': 'ea02849ff83b'}
-    spotify = requests.get("https://api.spotify.com/", headers=headers1)
-    soundcloud = requests.get("https://api.soundcloud.com/", headers=headers2)
-    itunes = requests.get("https://api.itunes.com/", headers=headers3)
-    youtube = requests.get("https://www.googleapis.com/youtube/v3/", headers=headers4)
 
-    top_music = [spotify["top"]["name"][0:3], soundcloud["top"]["all"]["title"][0:3], itunes["top"]["all"][0:3], youtube["music"]["leaderboard"]["all"]["name"][0:3]]
+@app.route('/')
+def index():
+    random45 = randint(0, 45)
+    music_recommendations = [most_loved_50["loved"][random45 + k]["strTrack"] for k in range(5)]
 
-    return render_template("index.html", top_music=top_music, spotify=spotify, soundcloud=soundcloud, itunes=itunes, youtube=youtube)
+    return render_template("index.html", music_recommendations=music_recommendations)
+
+
+@app.route('/songlookup', methods=["GET", "POST"])
+def songlookup():
+    return render_template("songlookup.html", requested=False)
+
+
+@app.route('/songlookup/result', methods=["GET", "POST"])
+def songlookupresult():
+    if request.form:
+        print(request.form.get("lookupsong"))
+        print(request.form.get("lookupartist"))
+        url = "https://theaudiodb.p.rapidapi.com/searchtrack.php"
+        querystring = {"s": request.form.get("lookupartist"), "t": request.form.get("lookupsong")}
+        headers = {
+            'x-rapidapi-key': "76cb9878c6msh4134b7ab3f64772p18a780jsn44ce0d13cb7d",
+            'x-rapidapi-host': "theaudiodb.p.rapidapi.com"
+        }
+        songinfo = json.loads(requests.request("GET", url, headers=headers, params=querystring).text)
+        print(songinfo)
+        print(type(songinfo))
+        return render_template("songlookupresult.html", requested=True, songdata=songinfo)
+    else:
+        return render_template("songlookupresult.html", requested=False)
+
+
+@app.route('/quiz/artist', methods=["GET", "POST"])
+def artistquiz():
+    random50 = randint(0, 50)
+    song = most_loved_50["loved"][random50]["strTrack"]
+    genre = most_loved_50["loved"][random50]["strGenre"]
+    artist = most_loved_50["loved"][random50]["strArtist"]
+    if request.form:
+        if request.form.get("artistguess") == request.form.get("artistcorrect"):
+            correct = "correct"
+        else:
+            correct = "incorrect"
+    else:
+        correct = "neither right or wrong, as you haven't guessed in this session yet, so there was no"
+    return render_template("artistquiz.html", most_loved_50=most_loved_50, song=song, genre=genre, artist=artist, correct=correct)
+
 
 @app.route('/itunes')
 def itunes():
     return render_template("itunes.html")
 
+
 @app.route('/soundcloud')
 def soundcloud():
     return render_template("soundcloud.html")
+
 
 @app.route('/spotify')
 def spotify():
     return render_template("spotify.html")
 
+
 @app.route('/signup')
 def signup():
     return render_template("signup.html")
 
+
 @app.route('/login')
 def login():
     return render_template("login.html")
+
 
 @app.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
-@app.route('/email', methods = ['GET','POST'])
+
+@app.route('/email', methods=['GET', 'POST'])
 def email():
     if request.method == 'POST':
         email = request.form['email']
         email_text = 'Subject: {}\n\n{}'.format("MUSIC APP", 'THANK YOU FOR SUBSCRIBING TO THE P2HARDSTUCK MUSIC APP')
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465,context=ssl.create_default_context())
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465, context=ssl.create_default_context())
         server.login('p2hardstuck@gmail.com', 'CompSci1234!')
         server.sendmail('p2hardstuck@gmail.com', email, email_text)
         server.close()
-        print ("email sent to:", email)
+        print("email sent to:", email)
         return render_template("sub.html")
     else:
         return render_template("email.html")
 
-@app.route('/')
-def index():
-    top_music = [["Into the Thick of it", "Talking to the Moon", "Peaches"], ["Into the Thick of it", "Peaches", "Besides you"], ["Into the Thick of it", "Talking to the Moon", "Peaches"], ["Into the Thick of it", "Peaches", "Besides you"], ["Talking to the Moon", "Peaches", "Champaign and Sunshine"]]
-
-    return render_template("index.html", top_music=top_music)
 
 if __name__ == "__main__":
     # runs the application on the repl development server
     app.run(debug=True, port="5000")
-
-

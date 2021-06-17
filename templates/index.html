@@ -14,44 +14,38 @@ body {background: linear-gradient(to bottom left, #00ffff 0%, #ffcc00 81%)}
 
     <div class="jumbotron text-left row">
         <div class="col-md-9">
-            <h3><strong>What is Music Project?</strong> Application to compare what's trending in music.
-            It will be similar to the itunes charts where songs are ranked.
-                We will pull this data using multiple APIs to update rankings live.</h3>
+            <h3><strong>What is Music Project?</strong>
+                Music project is a website that does lots of things related to music.
+                One of these things are right below, where it recommends 5 songs to listen.
+                This is accomplished through accessing a public API and selecting 5 good songs from a wide variety of songs.
+                The artist quiz button will take you to a little minigame, where you test your knowledge of songs.
+                This works by prearranging values for the API access so that it can check the submission with the correct answer.
+                Song lookup is a simple API access point that returns summaries for a song that you enter.
+                The taskbar contains access to the people pages as well as to the subscription page.
+
+            </h3>
         </div>
     </div>
 </div>
-<h2 style="text-align:center">Comparison Tables</h2>
-<p style="text-align:center">top songs from each platform:</p>
 
+<form action="/quiz/artist">
+    <input type="submit" value="go to artist quiz" />
+</form>
+
+<form action="/songlookup">
+    <input type="submit" value="go to song lookup" />
+</form>
+
+<h2 style="text-align:center">Recommended songs to listen to</h2>
 <div class="center">
         <table class="center-block" style="margin: 0% 25% 25%;">
             <tr>
-                <td><a  style="background-color: green" href="/spotify">Spotify</a></td>
-                <th style="background-color: orange">Soundcloud</th>
-                <th style="background-color: #ff5349">iTunes</th>
-                <th style="background-color: #ff5349">Youtube Music</th>
-                <th style="background-color: #ff5349">Google Play Music</th>
+                <td>{{music_recommendations[0]}}</td>
+                <td>{{music_recommendations[1]}}</td>
+                <td>{{music_recommendations[2]}}</td>
+                <td>{{music_recommendations[3]}}</td>
+                <td>{{music_recommendations[4]}}</td>
             </tr>
-            <tr>
-                <td>{{top_music[0][0]}}</td>
-                <td>{{top_music[1][0]}}</td>
-                <td>{{top_music[2][0]}}</td>
-                <td>{{top_music[3][0]}}</td>
-                <td>{{top_music[4][0]}}</td>
-            </tr>
-            <tr>
-                <td>{{top_music[0][1]}}</td>
-                <td>{{top_music[1][1]}}</td>
-                <td>{{top_music[2][1]}}</td>
-                <td>{{top_music[3][1]}}</td>
-                <td>{{top_music[4][1]}}</td>
-            </tr>
-            <tr>
-                <td>{{top_music[0][2]}}</td>
-                <td>{{top_music[1][2]}}</td>
-                <td>{{top_music[2][2]}}</td>
-                <td>{{top_music[3][2]}}</td>
-                <td>{{top_music[4][2]}}</td>
             </tr>
         </table>
 </div>
