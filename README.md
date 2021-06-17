@@ -14,6 +14,7 @@ Our planned project is a table that shows 5 song recomendations pulled from a mu
  click "go to song lookup" if you want to find more details about your favorite songs.
 
 Artist quiz instructions: just type the name of the artist in the given textbox and hit go. It will tell you if you were right or wrong in the text above the question. Whenever you want to go back, hit the home button at the top of the page.
+
 Song lookup instructions: just put in the name of the song and the artist into the two testboxes and hit go. It will return a new textbox with information about the song you searched. Whenever you want to go back, hit the home button at the top of the page.
 
 
