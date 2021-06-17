@@ -104,7 +104,7 @@ def artistquiz():
     genre = most_loved_50["loved"][random50]["strGenre"]
     artist = most_loved_50["loved"][random50]["strArtist"]
     if request.form:
-        if request.form.get("artistguess") == request.form.get("artistcorrect"):
+        if request.form.get("artistguess").lower() == request.form.get("artistcorrect").lower():
             correct = "correct"
         else:
             correct = "incorrect"
